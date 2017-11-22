@@ -1,0 +1,10 @@
+#############
+#  NETCONF  #
+#############
+
+# NETCONF (NETwork CONFiguration) protocol defined by the Internet Society
+# Internet Engineering Task Force (IETF) NETCONF Working Group is a
+  session-based network management protocol
+# NETCONF allows retrieving state or configuration data and manipulating
+  configuration data on network devices
+ 
