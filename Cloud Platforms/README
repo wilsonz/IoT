@@ -1,0 +1,90 @@
+Beebotte (Paris, France) founded in 2014    
+      https://beebotte.com/tutorials
+Carriots (Madrid, Spain) spun out of Wairbut in 2011    
+      https://www.carriots.com/tutorials
+GroveStreams (Minneapolis, Minnesota) founded in 2011
+      https://grovestreams.com/developers/getting_started_helloworld_python.html
+ThingSpeak launched in 2010 by ioBridge, Inc. (Marlborough, Massachusetts)
+      https://thingspeak.com/docs/tutorials
+Google Sheets with OAuth2 for authorization
+      https://github.com/burnash/gspread
+      http://gspread.readthedocs.org/en/latest/oauth2.html
+      https://github.com/google/oauth2client/blob/master/CHANGELOG.md
+Plotly (Montreal, Canada) founded in 2012
+     https://plot.ly http://help.plot.ly https://plot.ly/workshop
+Tableau (Seattle, Washington) founded in 2003
+      https://www.tableau.com https://www.tableau.com/learn
+
+ARTIK Cloud
+      https://artik.cloud (Samsung)
+AWS IoT
+      https://console.aws.amazon.com/iot 
+Blynk
+      http://www.blynk.cc 
+Cumulocity
+      https://www.cumulocity.com 
+Eclipse IoT
+      http://iot.eclipse.org 
+EVRYTHNG
+      https://evrythng.com 
+Fluxtream
+      https://fluxtream.org 
+GE Predix
+      https://www.predix.io 
+Google Cloud
+      https://cloud.google.com/solutions/iot 
+IFTTT
+      https://ifttt.com 
+Instapush
+      https://instapush.im 
+Ionic
+      http://ionicframework.com 
+Open Sensors
+      https://www.opensensors.io 
+PrivateEyePi
+      http://www.privateeyepi.com 
+Pushbullet
+      https://www.pushbullet.com 
+relayr
+      https://www.relayr.io 
+remot3.it
+      https://www.remot3.it 
+Samsara
+      https://www.samsara.com 
+Sparkfun
+      https://data.sparkfun.com 
+Temboo
+      https://temboo.com 
+ThingWorx
+      http://www.thingworx.com 
+Watson IoT
+      http://www.ibm.com/internet-of-things 
+WebIOPi
+      http://webiopi.trouch.com 
+Xively
+      https://xively.com 
+Yeelink
+      http://www.yeelink.net (in Chinese)
+Zapier
+      https://zapier.com 
+
+
+####################################
+# Install Software on Raspnerry Pi #
+####################################
+
+# install gspread Google Sheets Python API and OAuth2
+pi@xyzpi: ~ $ sudo apt-get update
+pi@xyzpi: ~ $ sudo apt-get install git python-dev
+pi@xyzpi: ~ $ sudo apt-get install build-essential python-smbus python-openssl
+pi@xyzpi: ~ $ sudo apt-get install -U gspread oauth2client
+
+# install Adafruit_Python_DHT library on Raspberry Pi
+pi@xyzpi: ~ $ git clone https://github.com/adafruit/Adafruit_python_DHT.git
+pi@xyzpi: ~ $ cd *DHT
+pi@xyzpi: ~/Adafruit_Python_DHT $ sudo python setup.py install
+
+# install Adafruit_Python_BMP library on Raspberry Pi
+pi@xyzpi: ~ $ git clone https://github.com/adafruit_Python_BMP.git
+pi@xyzpi: ~ $ cd *BMP
+pi@xyzpi: ~/Adafruit_Python_BMP $ sudo python setup.py install
