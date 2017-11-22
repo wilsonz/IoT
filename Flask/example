@@ -1,0 +1,146 @@
+# NOOBS includes Flask (tutorial) web development framework for Python based on Jinja2 template engine 
+# and Werkzeug WSGI toolkit 
+
+pi@xyzpi:~ $ cd iot
+pi@xyzpi:~/iot $ git pull
+pi@xyzpi:~/iot $ cd *4
+pi@xyzpi:~/iot/lesson4 $ cat hello_world.py
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+
+pi@xyzpi:~/iot/lesson4 $ python hello_world.py
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [07/Oct/2017 23:10:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Oct/2017 23:10:24] "GET /favicon.ico HTTP/1.1" 404 -
+^C
+pi@xyzpi:~/iot/lesson4 $ 
+
+#############
+# Flask-Ask #
+#############
+
+Flask-Ask is a Flask extension of rapid Alexa skills kit (ASK) development for Amazon Echo devices
+Quickstart to run memory_game.py with templates.yaml and ngrok tunneling service, 
+then add, configure, and test a new Alexa skill of Memory Game that asks to repeat three numbers backwards
+
+pi@xyzpi:~ $ sudo pip install -U flask-ask
+pi@xyzpi:~ $ cd iot
+pi@xyzpi:~/iot $ git pull
+pi@xyzpi:~/iot $ cd lesson4
+pi@xyzpi:~/iot/lesson4 $ python memory_game.py
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-376-050
+
+
+#########
+# Ngrok #
+#########
+
+Ngrok is secure tunneling service that makes a device available from anywhere online
+pi@xyzpi:~ $ sudo wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+pi@xyzpi:~ $ sudo unzip ngrok-stable-linux-arm.zip
+pi@xyzpi:~ $ ./ngrok http 5000
+ngrok by @inconshreveable          (Ctrl+C to quit)
+                                                                           
+Session Status                online                                       
+Version                       2.2.8                                        
+Region                        United States (us)                            
+Web Interface                 http://127.0.0.1:4040                        
+Forwarding                    http://f8c85541.ngrok.io -> localhost:5000   
+Forwarding                    https://f8c85541.ngrok.io -> localhost:5000  
+                                                                           
+Connections                   ttl     opn     rt1     rt5     p50     p90  
+                              0       0       0.00    0.00    0.00    0.00
+
+HTTP Requests
+-------------    
+
+POST /                        200 OK
+
+
+##################################
+# Configure and Test Alexa Skill #
+##################################
+
+- Login Building Alexa Skills of the Amazon Developer Console
+- Click "Add a New Skill"
+- Skill Information > Name: Memory Game and Invocation Name: memory game
+- Interaction Model > Copy Intent Schema and Sample Utterances from Quickstart
+- Configuration > Service Endpoint Type: HTTPS and Default: https://f8c85541.ngrok.io
+- SSL Certificate > Wildcard Certificate
+- On a laptop, login Echosim.io with Amazon account to use Alexa Skill Testing Tool
+- Click and hold the microphone button to speak
+- "Start memory game."
+- "Welcome to memory game. I'm going to say three numbers for you to repeat backwards. Ready?"
+- "Yes."
+- "Can you repeat the numbers one, seven, six backwards?"
+- "Six, seven, one."
+- "Good job!"
+
+
+#####################
+# Apache Web Server #
+#####################
+
+pi@xyzpi:~ $ sudo apt-get update
+pi@xyzpi:~ $ sudo apt-get install apache2
+pi@xyzpi:~ $ sudo service apache2 restart
+
+pi@xyzpi:~ $ sudo apt-get install php7.0 libapache2-mod-php7.0
+pi@xyzpi:~ $ cd /var/www/html
+pi@xyzpi:/var/www/html $ ls
+index.html
+
+pi@xyzpi:/var/www/html $ sudo mv index.html index.html.bak
+pi@xyzpi:/var/www/html $ sudo cp ~/iot/lesson4/index.php .
+pi@xyzpi:/var/www/html $ cat index.php
+<?php
+echo "Hello world!";
+echo "<br>";
+echo date('Y-m-d H:i:s');
+echo "<br>";
+phpinfo();
+?>
+pi@xyzpi:/var/www/html $ cd
+pi@xyzpi:~ $ 
+pi@xyzpi ~ $ sudo service apache2 restart
+pi@xyzpi ~ $ 
+
+
+#############
+# WordPress #
+#############
+
+Build a Linux-Apache-MySQL-PHP (LAMP) web server with WordPress 
+pi@xyzpi:~ $ sudo apt-get install php7.0-mysql
+pi@xyzpi:~ $ cd /var/www/html
+pi@xyzpi:/var/www/html $ sudo chown pi: .
+pi@xyzpi:/var/www/html $ mv index.php index.php.bak
+pi@xyzpi:/var/www/html $ wget http://wordpress.org/latest.tar.gz
+pi@xyzpi:/var/www/html $ tar xzf latest.tar.gz
+pi@xyzpi:/var/www/html $ mv wordpress/* .
+pi@xyzpi:/var/www/html $ rm -rf wordpress latest.tar.gz
+pi@xyzpi:/var/www/html $ cd
+pi@xyzpi:~ $ mysql -u root -p
+Enter password: 
+MariaDB [(none)]> use mysql
+MariaDB [mysql]> create database wordpress;
+Query OK, 1 row affected (0.00 sec)
+MariaDB [mysql]> grant all privileges on wordpress.* to pi@localhost;
+Query OK, 0 rows affected (0.00 sec)
+MariaDB [mysql]> quit
+Bye
+pi@xyzpi:~ $ sudo service apache2 restart
+pi@xyzpi:~ $ 
+
+
