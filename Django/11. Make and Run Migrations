@@ -1,0 +1,86 @@
+#
+# Make and run migrations once and only after any changes to the Django files
+#
+pi@xyzpi:~/xyzrpi $ python manage.py makemigrations myapp
+Migrations for 'myapp':
+  myapp/migrations/0001_initial.py
+    - Create model TemperatureData
+    
+pi@xyzpi:~/xyzrpi $ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, myapp, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying myapp.0001_initial... OK
+  Applying sessions.0001_initial... OK
+  
+pi@xyzpi:~/xyzrpi $ 
+
+###################################################
+# Set Django administration username and password #
+###################################################
+
+pi@xyzpi:~/xyzrpi $ python manage.py createsuperuser
+Username (leave blank to use 'pi'): 
+Email address: EMAIL_ADDRESS
+Password: PASSWORD
+Password (again): PASSWORD
+Superuser created successfully.
+
+pi@xyzpi:~/xyzrpi $
+
+#######################################
+# Run Django server at 127.0.0.1:8000 #
+#######################################
+
+pi@xyzpi:~/xyzrpi $ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 07, 2017 - 15:26:31
+Django version 1.11.5, using settings 'stevens.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+##
+#
+Open the Chromium browser on Raspberry Pi via VNC Viewer
+Go to http://127.0.0.1:8000/admin or http://localhost:8000/admin
+Login with Django administration username (pi) and password
+Click temperature data to add date and time in YYYY-MM-DDTHH:MM:SS-05:00, temperature in Fahrenheit, latitude 40.7451, and longitude -74.0255
+Click SAVE then LOG OUT
+Go to http://127.0.0.1:8000 or http://localhost:8000 to view app
+#
+########################################
+# Run Django server at host IP address #
+########################################
+
+pi@xyzpi:~/xyzrpi $ python manage.py runserver 192.168.1.160:8000
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 07, 2017 - 17:03:35
+Django version 1.11.5, using settings 'stevens.settings'
+Starting development server at http://192.168.1.160:8000/
+Quit the server with CONTROL-C.
+
+##
+#
+Open a browser on the laptop
+Go to http://192.168.1.160:8000/admin
+Login with Django administration username (pi) and password
+Click temperature data to add date and time in YYYY-MM-DDTHH:MM:SS-05:00, temperature in Fahrenheit, latitude 40.7451, and longitude -74.0255
+Click SAVE then LOG OUT
+Go to http://192.168.1.160:8000 to view app
+#
