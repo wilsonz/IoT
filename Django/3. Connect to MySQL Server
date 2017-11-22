@@ -1,0 +1,149 @@
+pi@xyzpi: ~ $ sudo mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 1
+Server version: 10.1.23-MariaDB-9+deb9u1 Raspbian 9.0
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+
+MariaDB [(none)]> use mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [mysql]>
+
+###############
+# Create User #
+###############
+
+MariaDB [mysql]> select user, host from mysql.user;
++------+-----------+
+| User | Host      |
++------+-----------+
+| root | localhost |
++------+-----------+
+1 row in set (0.00 sec)
+
+MariaDB [mysql]> create user pi@localhost identified by 'PASSWORD';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> select user, host from mysql.user;
++------+-----------+
+| user | host      |
++------+-----------+
+| root | localhost |
+| pi   | localhost |
++------+-----------+
+2 rows in set (0.00 sec)
+
+MariaDB [mysql]> 
+
+############################
+# Create and Drop Database #
+############################
+
+MariaDB [mysql]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [mysql]> create database test;
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [mysql]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+4 rows in set (0.01 sec)
+
+MariaDB [mysql]> drop database test;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [mysql]>
+
+####################
+# Create Databases #
+####################
+MariaDB [mysql]> create database stevens;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mysql]> create database weather;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mysql]> create database wordpress;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mysql]> create database parking;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mysql]> create database sensing;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mysql]> create database myraspi;
+Query OK, 1 row affected (0.00 sec)
+
+#############################
+# Grant Privileges to Users #
+#############################
+
+MariaDB [mysql]> grant all privileges on stevens.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [mysql]> grant all privileges on weather.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [mysql]> grant all privileges on wordpress.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [mysql]> grant all privileges on parking.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [mysql]> grant all privileges on sensing.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [mysql]> grant all privileges on myraspi.* to pi@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+
+##############
+# Quit MySQL #
+##############
+
+MariaDB [mysql]> quit
+Bye
+pi@iotu:~ $ 
+
+MariaDB [mysql]> exit
+Bye
+pi@iotu:~ $ 
+
+MariaDB [mysql]> Bye
+pi@iotu:~ $ 
+
+MariaDB [(none)]> Ctrl-C -- exit!
+Aborted
+pi@iotu:~ $ 
