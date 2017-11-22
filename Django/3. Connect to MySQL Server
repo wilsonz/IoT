@@ -110,22 +110,22 @@ Query OK, 1 row affected (0.00 sec)
 # Grant Privileges to Users #
 #############################
 
-MariaDB [mysql]> grant all privileges on stevens.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on stevens.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
-MariaDB [mysql]> grant all privileges on weather.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on weather.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
-MariaDB [mysql]> grant all privileges on wordpress.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on wordpress.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
-MariaDB [mysql]> grant all privileges on parking.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on parking.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
-MariaDB [mysql]> grant all privileges on sensing.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on sensing.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
-MariaDB [mysql]> grant all privileges on myraspi.* to pi@localhost;
+MariaDB [mysql]> grant all privileges on myraspi.* to pi@xyzpi;
 Query OK, 0 rows affected (0.01 sec)
 
 
@@ -135,15 +135,15 @@ Query OK, 0 rows affected (0.01 sec)
 
 MariaDB [mysql]> quit
 Bye
-pi@iotu:~ $ 
+pi@xyzpi:~ $ 
 
 MariaDB [mysql]> exit
 Bye
-pi@iotu:~ $ 
+pi@xyzpi:~ $ 
 
 MariaDB [mysql]> Bye
-pi@iotu:~ $ 
+pi@xyzpi:~ $ 
 
 MariaDB [(none)]> Ctrl-C -- exit!
 Aborted
-pi@iotu:~ $ 
+pi@xyzpi:~ $ 
