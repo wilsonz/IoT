@@ -1,0 +1,18 @@
+pi@iotu:~ $ sudo apt-get install python-dev
+pi@iotu:~ $ wget https://bootstrap.pypa.io/get-pip.py
+pi@iotu:~ $ sudo python get-pip.py
+pi@iotu:~ $ sudo reboot
+pi@iotu:~ $ pip -V
+pip 9.0.1 from /usr/local/lib/python2.7/dist-packages (python 2.7)
+
+pi@iotu:~ $ sudo pip install -U pip
+pi@iotu:~ $ sudo pip install -U setuptools                        --> for Python packages
+pi@iotu:~ $ sudo pip install -U django
+pi@iotu:~ $ sudo pip install -U djangorestframework
+pi@iotu:~ $ sudo pip install -U django-filter
+pi@iotu:~ $ sudo pip install -U markdown                          --> text to html conversion
+pi@iotu:~ $ sudo pip install -U requests                          --> http library for python
+pi@iotu:~ $ python
+>>> import django
+>>> django.VERSION
+(1, 11, 6, u'final', 0)
