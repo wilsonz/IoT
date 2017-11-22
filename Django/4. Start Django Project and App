@@ -1,0 +1,124 @@
+pi@xyzpi: ~ $ cd iot
+pi@xyzpi: ~/iot $ git pull
+pi@xyzpi: ~/iot $ cd
+pi@xyzpi: ~ $ sudo apt-get install python-mysqldb              --> Python interface to MySQL
+pi@xyzpi: ~ $ django-admin startproject xyzrpi
+pi@xyzpi: ~ $ cd xyzrpi                    --> Django creats the project directory "xyzrpi" 
+pi@xyzpi: ~/xyzrpi $ ls                        and subdirectory "xyzrpi"
+manage.py    xyzrpi
+
+pi@xyzpi: ~/xyzrpi $ python manage.py startapp myapp
+pi@xyzpi: ~/xyzrpi $ ls
+manage.py    myapp    xyzrpi
+
+pi@xyzpi: ~/xyzrpi $ cd xyzrpi
+pi@xyzpi: ~/xyzrpi/xyzrpi $ ls
+__init__.py   __init__.pyc    settings.py   settings.pyc   urls.py   wsgi.py
+
+pi@xyzpi: ~/xyzrpi/xyzrpi $ cd ..
+pi@xyzpi: ~/xyzrpi $ cd myapp
+pi@xyzpi: ~/xyzrpi/myapp $ ls
+admin.py    apps.py   __init__.py   migrations    models.py   tests.py    views.py
+
+###################################
+# Copy Templates and Static Files #
+###################################
+
+pi@xyzpi: ~/xyzrpi/myapp $ mkdir static templates
+pi@xyzpi: ~/xyzrpi/myapp $ cd templates
+pi@xyzpi: ~/xyzrpi/myapp/templates $ mkdir myapp
+pi@xyzpi: ~/xyzrpi/myapp/templates $ cd myapp
+pi@xyzpi: ~/xyzrpi/myapp/templates/myapp $ cp ~/iot/lesson4/stevens/index.html .
+pi@xyzpi: ~/xyzrpi/myapp/templates/myapp $ ls
+index.html
+pi@xyzpi: ~/xyzrpi/myapp/templates.myapp $ cd ~/xyzrpi/myapp/static
+pi@xyzpi: ~/xyzrpi/myapp/static $ cp ~/iot/*4/stevens/favicon.ico .
+pi@xyzpi: ~/xyzrpi/myapp/static $ mkdir myapp
+pi@xyzpi: ~/xyzrpi/myapp/static $ cd myapp
+pi@xyzpi: ~/xyzrpi/myapp/static/myapp $ cp ~/iot/lesson4/stevens/*js .
+pi@xyzpi: ~/xyzrpi/myapp/static/myapp $ ls
+bootstrap.min.caa   bootstrap.min.js    jquery.min.js   scripts.js
+
+pi@xyzpi: ~/xyzrpi/myapp/static/myapp $ cd ~/xyzrpi
+
+############################
+# Django Project Directory #
+############################
+
+/xyzrpi
+          manage.py
+          /xyzrpi
+                    __init__.py  settings.py  urls.py  wsgi.py
+          /myapp
+                    admin.py  apps.py  __init__.py  models.py  tests.py  views.py
+                    /migrations
+                                __init__.py
+                    /static
+                            favicon.ico
+                            /myapp
+                                    *.css  *.js
+                    /templates
+                                /myapp
+                                        index.html
+                                     
+########################
+# Print Directory Tree #
+########################
+
+pi@xyzpi: ~ $ sudo apt-get install tree
+pi@xyzpi: ~ $ cd xyzrpi
+pi@xyzpi: ~/xyzpi $ tree -d
+.
+├── myapp
+│   ├── migrations
+│   ├── static
+│   │   └── myapp
+│   └── templates
+│       └── myapp
+└── xyzrpi
+
+7 directories
+pi@xyzpi: ~/xyzrpi $ cd xyzrpi
+pi@xyzpi: ~/xyzrpi/xyzrpi $ tree
+.
+├── __init__.py
+├── __init__.pyc
+├── settings.py
+├── settings.pyc
+├── urls.py
+└── wsgi.py
+
+0 directories, 6 files
+pi@xyzpi: ~/xyzrpi/xyzrpi $ cd ..
+
+pi@xyzpi: ~/xyzrpi $ tree -I *pyc
+.
+├── manage.py
+├── myapp
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── static
+│   │   ├── favicon.ico
+│   │   └── myapp
+│   │       ├── bootstrap.min.css
+│   │       ├── bootstrap.min.js
+│   │       ├── jquery.min.js
+│   │       └── script.js
+│   ├── templates
+│   │   └── myapp
+│   │       └── index.html
+│   ├── tests.py
+│   └── views.py
+└── xyzrpi
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+7 directories, 18 files
+
+
