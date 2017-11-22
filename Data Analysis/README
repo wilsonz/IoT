@@ -1,0 +1,255 @@
+Overview of data science
+    Characteristics of big (fast) data
+    Data analysis and visualization
+    
+Python for data analysis
+    NumPy array
+    Matplotlib pyplot, histogram, and boxplot
+    SciPy stats linear regression
+    SciPy interpolation
+    Scikit-learn cross-validation prediction
+    Load files of comma-separated values (CSV) into Pandas
+    Pandas groupby
+    Write Pandas dataframe to CSV files
+
+
+#####################
+#  IoT Value Chain  #
+#####################
+IoT is not about adding connectivity to all things
+IoT is about how sensors, devices, things, and services can be integrated to create value
+Value is derived from making sense of data, turning it into knowledge and meaningful action
+
+##
+# Characteristics of Big (Fast) Data
+#
+Volume: size of data (MB, GB, TB, PB, EB, ZB, and YB)
+
+Velocity: speed of data collection, modeling and analysis, monitoring, predictive analytics, 
+          and decision making (batch, periodic, near real time, and real time)
+          
+Variety: form of source data (structured, semi-structured, and unstructured)
+
+Variability: difference in data context and meaning
+
+Veracity: trustworthiness in accuracy of data and analysis
+
+Visualization: readable and understandable graphs
+
+Value: actionable information and knowledge from data analysis with insight into events, trends, 
+       and correlations(not causation)
+       
+####################
+#  Apache Hadoop  ##
+####################
+
+The name Hadoop is not an acronym; it's a made-up name. 
+The project's creator, Doug Cutting, explains how the name came about: 
+    “The name my kid gave a stuffed yellow elephant. 
+     Short, relatively easy to spell and pronounce, meaningless, 
+     and not used elsewhere: those are my naming criteria.”
+ 
+ 
+##
+# ACID Database Transaction Properties
+# 
+Atomicity: 
+    Transactions are all or nothing — if one part of the transaction fails, 
+                                      then the entire transaction fails, 
+                                      and the database state is left unchanged.
+Consistency: 
+    Only valid data are saved — any transaction will bring the database from one valid state to another.
+    
+Isolation: 
+    Transactions do not affect each other — the concurrent execution of transactions results in 
+                                            a system state that would be obtained 
+                                            if transactions were executed serially.
+                                            
+Durability: 
+    Written data will not be lost — once a transaction has been committed, 
+                                    it will remain so, even in the event of power loss, 
+                                    crashes, or errors.
+                                    
+##################################
+#  Data Warehouse vs. Data Lake  #
+##################################
+
+  
+            Data Warehouse                      Data Lake or Data Reservoir
+Data        Structured, processed               Structured, semi-structured, unstructured
+Processing  Schema-on-write                     Schema-on-read
+Storage     Expensive for large data volumes    Designed for low-cost storage
+Agility     Less agile, fixed configuration     Highly agile, configure and reconfigure as needed
+Security    Mature                              Maturing
+Users       Business professionals              Data scientists
+
+
+##
+# Sharding
+#
+The word shard means a small part of a whole.
+Sharding is a type of database partitioning that separates very large databases into 
+        smaller, faster, more easily managed parts called data shards.
+Each shard is held on a separate, independent, self-sufficient database server instance 
+        to spread load via a shared nothing (SN) distributed computing architecture.
+
+
+###################
+#  Data Analysis  #
+###################
+
+Data analysis is the process of 
+- Inspecting, cleaning, transforming, and modeling data with the goal of discovering useful information, 
+  suggesting conclusions, and supporting decision-making.
+  https://en.wikipedia.org/wiki/Data_analysis 
+- Systematically applying statistical and/or logical techniques to describe and illustrate, 
+  condense and recap, and evaluate data.
+  https://ori.hhs.gov/education/products/n_illinois_u/datamanagement/datopic.html 
+  
+##
+# Data Sources
+#
+https://www.data.gov
+http://www.census.gov/data.html 
+https://www.ncdc.noaa.gov/data-access
+https://nycopendata.socrata.com
+https://www.opendatanetwork.com
+http://data.europa.eu/euodp/en/data
+https://data.gov.uk
+http://open.canada.ca/en
+https://knoema.com 
+https://www.cia.gov/library/publications/the-world-factbook
+http://data.worldbank.org 
+https://data.oecd.org 
+https://www.unicef.org/reports
+https://www.gapminder.org/data 
+http://www.stats.gov.cn/english 
+https://data.gov.in
+http://www.data.gov.sa/en/dataset
+
+https://aws.amazon.com/datasets
+https://www.google.com/publicdata/directory 
+https://www.google.com/trends/explore
+http://wiki.dbpedia.org
+http://archive.ics.uci.edu/ml/index.html
+http://www.pewinternet.org/datasets
+http://www.who.int/en
+https://www.healthdata.gov
+https://www.cdc.gov/nchs/index.htm 
+http://portals.broadinstitute.org/cgi-bin/cancer/datasets.cgi
+http://content.digital.nhs.uk/home
+http://www.itu.int/en/ITU-D/Statistics/Pages/default.aspx 
+http://www.datasciencecentral.com/profiles/blogs/great-sensor-datasets-to-prepare-your-next-career-move-in-iot-int 
+
+
+########################
+#  Data Visualization  #
+########################
+
+# install packages on Raspberry Pi
+# install Numpy, SciPy, Matplotlib, and pandas (replace python-* with python3-* if using python3)
+pi@xyzpi:~ $ sudo apt-get update
+pi@xyzpi:~ $ sudo apt-get install build-essential
+pi@xyzpi:~ $ sudo apt-get install python-dev
+pi@xyzpi:~ $ sudo apt-get install python-setuptools
+pi@xyzpi:~ $ sudo apt-get install python-numpy
+pi@xyzpi:~ $ sudo apt-get install python-scipy
+pi@xyzpi:~ $ sudo apt-get install python-matplotlib
+pi@xyzpi:~ $ sudo apt-get install python-pandas
+
+# install the latest scikit-learn by pip instead of "sudo apt-get install python-sklearn"
+pi@xyzpi:~ $ sudo apt-get install libopenblas-dev
+pi@xyzpi:~ $ sudo pip install -U pip
+pi@xyzpi:~ $ sudo pip install -U scikit-learn
+
+# install packages on laptop
+$ sudo pip install -U pip 
+$ sudo pip install -U numpy scipy scikit-learn matplotlib pandas
+$ sudo pip list
+
+
+#######################
+#  Linear Regression  #
+#######################
+- Linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data.
+- One variable is considered to be an explanatory variable, and the other is considered to be a dependent variable.
+- This does not necessarily imply that one variable causes the other but that there is some significant association 
+  between the two variables.
+- A linear regression line has an equation of the form Y = a + bX, where X is the explanatory variable, 
+  Y is the dependent variable, the slope of the line is b, and a is the intercept (the value of y when x = 0).
+- The most common method for fitting a regression line is the method of least-squares.
+- This method calculates the best-fitting line for the observed data by minimizing 
+  the sum of the squares of the vertical deviations from each data point to the line.
+- An outlier lies far from the line and thus has a large residual value.
+- A lurking variable exists when the relationship between two variables is significantly affected 
+  by the presence of a third variable which has not been included in the modeling effort.
+- Attempting to extrapolate a regression equation to predict values outside of the range is often inappropriate.
+
+##
+# linreg.py
+#
+pi@xyzpi:~/iot/lesson8 $ cat linreg.py
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+x = np.random.random(10)
+y = np.random.random(10)
+slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+plt.xlabel('x')
+plt.ylabel('y')
+plt.plot(x,y,'ro')
+plt.plot([intercept,intercept+slope])
+plt.show()
+pi@xyzpi:~/iot/lesson8 $ python linreg.py
+
+##
+# interpolation.py
+#
+pi@xyzpi:~/iot/lesson8 $ cat interpolation.py
+import numpy as np
+from scipy.interpolate import interp1d
+import matplotlib.pyplot as plt
+x = np.linspace(0, 10, num=11, endpoint=True)
+y = np.cos(-x**2/9.0)
+f = interp1d(x, y)
+f2 = interp1d(x, y, kind='cubic')
+xnew = np.linspace(0, 10, num=41, endpoint=True)
+plt.plot(x, y, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
+plt.legend(['data', 'linear', 'cubic'], loc='best')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+pi@xyzpi:~/iot/lesson8 $ python interpolation.py
+
+
+###########################
+#  Cross-Validation (CV)  #
+###########################
+
+- A polynomial regression can keep adding higher order terms and get better and better fits to the data.
+- But the predictions from the model on new data will usually get worse as higher order terms are added.
+- Suppose there are n independent observations, y1,...,yn.
+  Let observation yi form the test set, and fit the model using the remaining data as the training set. 
+  Then compute the error, ei, for the omitted observation. 
+  This is a predicted residual to distinguish it from an ordinary residual.
+  Repeat step 1 for i=1,...,n, then compute cross-validation as the mean squared error from e1,...,en.
+##
+# plot_cv_predict.py
+#
+pi@xyzpi:~/iot/lesson8 $ cat plot_cv_predict.py
+from sklearn import datasets
+from sklearn.model_selection import cross_val_predict
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+lr = linear_model.LinearRegression()
+boston = datasets.load_boston()
+y = boston.target
+print('Number of instances: %d' % (boston.data.shape[0]))
+predicted = cross_val_predict(lr, boston.data, y, cv=10)
+fig, ax = plt.subplots()
+ax.scatter(y, predicted)
+ax.plot([y.min(), y.max()], [y.min(), y.max()], lw=2)
+ax.set_xlabel('Measured')
+ax.set_ylabel('Predicted')
+plt.show()
+pi@xyzpi:~/iot/lesson8 $ python plot_cv_predict.py
