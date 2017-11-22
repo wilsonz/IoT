@@ -1,6 +1,0 @@
-Django is a model-template-view(MTV) ot model-view-controller(MVC)framework for creating Python applications.
-By default, Django applications are configured to store data into a lightweight SQLite3 database file.
-Django also support relational database engines such as MySQL, Oracle, and PostgreSQL; and non-relational databasae(NoSQL) engines such as Amazon SimpleDB, Apache Cassandra, Elasticsearch, Google App Engine, MongoDB, and Redis.
-
-Flask is another web development framework for creating Python applications based on Jinja2 template engine and Werkzeug WSGI (Web Server Gateway Interface) toolkit.
-Alternatives include Apache HTTP server and WordPress based on a Linux-Apache-MySQL-PHP(LAMP) stack.
