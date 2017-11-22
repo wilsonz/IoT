@@ -1,0 +1,12 @@
+Flask is a web development framework for creating Python applications based on Jinja2 template engine 
+and Werkzeug WSGI (Web Server Gateway Interface) toolkit.
+Alternatives include Apache HTTP server and WordPress based on a Linux-Apache-MySQL-PHP (LAMP) stack
+
+The Pocoo Team led by Georg Brandl (Germany) and Armin Ronacher (Austria) have worked on various Python libraries 
+and applications since 2004 
+    - The name “Pocoo” bears no meaning and is now also the name of the logo owl
+    
+Armin Ronacher (nickname mitsuhiko) has led the following projects under the three-clause BSD license
+    - Jinja template engine since 2006 
+    - Werkzeug WSGI (Web Server Gateway Interface) utility library since 2007
+    - Flask microframework since 2010
