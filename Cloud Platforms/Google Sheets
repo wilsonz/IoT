@@ -1,0 +1,98 @@
+# Create Google Cloud Identify and Access Management (IAM)
+# create and enter the project name, e.g., rpidata
+# click Google APIs, select Google Drive API, then enable it
+# click Create Credentials, select service account, then create
+# select JSON key type and click Create key to download rpidata-xxxxxxxx.json
+# On Raspberry Pi, install package, and copy code to demo directory
+
+  pi@xyzpi:~ $ sudo pip install -U gspread oauth2client
+  pi@xyzpi:~ $ mkdir demo
+	pi@xyzpi:~ $ cd demo
+  pi@xyzpi:~/demo $ cp ~/iot/lesson3/system_info.py .
+  pi@xyzpi:~/demo $ cp ~/iot/lesson7/rpi_spreadsheet.py .
+  
+# move or copy the .json key file to the same directory as rpi_spreadsheet.py
+  pi@xyzpi:~ $ mv ~/Downloads/rpidata-*.json ~/demo
+             $ scp rpidata-*.json pi@192.168.1.x:/home/pi/demo
+             
+# Share the spreadsheet with the "client_email" address in the .json file, 
+# select “Can edit,” then click "Send" 
+# — Getting "Delivery Status Notification (Failure)" from mailer-daemon@google.com is OK
+# Delete Rows 2 to 1000, then enter Date / Time, CPU Usage %, Temperature C to header cells
+
+
+#########################
+#  rpi_spreadsheet.py  ##
+#########################
+
+pi@xyzpi:~ $ cd demo
+pi@xyzpi:~/demo $ cp ~/iot/lesson7/rpi_spreadsheet.py .
+pi@xyzpi:~/demo $ nano rpi_spreadsheet.py
+
+import json
+import sys
+import time
+import datetime
+import gspread
+import psutil
+import subprocess
+from system_info import get_temperature
+from oauth2client.service_account import ServiceAccountCredentials
+GDOCS_OAUTH_JSON       = 'rpidata-xxxxxxxxxxxx.json'        --> change file names
+GDOCS_SPREADSHEET_NAME = 'rpidata'                         
+FREQUENCY_SECONDS      = 30                                 --> change # of seconds
+def login_open_sheet(oauth_key_file, spreadsheet):
+    try:
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(oauth_key_file, 
+                      scopes=['https://spreadsheets.google.com/feeds'])
+        gc = gspread.authorize(credentials)
+        worksheet = gc.open(spreadsheet).sheet1
+        return worksheet
+    except Exception as ex:
+        print 'Unable to login and get spreadsheet. Check OAuth credentials,
+              spreadsheet name, and make sure spreadsheet is shared to the client_email 
+              address in the OAuth .json file!'
+        print 'Google sheet login failed with error:', ex
+        sys.exit(1)
+print 'Logging sensor measurements to {0} every {1}   
+      seconds.'.format(GDOCS_SPREADSHEET_NAME, FREQUENCY_SECONDS)
+print 'Press Ctrl-C to quit.'
+worksheet = None
+while True:
+    if worksheet is None:
+        worksheet = login_open_sheet(GDOCS_OAUTH_JSON, GDOCS_SPREADSHEET_NAME)
+    dat = datetime.datetime.now()
+    cpu = psutil.cpu_percent()
+    tmp = get_temperature()
+    print(dat)
+    print('CPU Usage in %: '+str(cpu))
+    print('Temperature in C: ' +str(tmp))
+    try:
+        worksheet.append_row((dat, cpu, tmp))
+    except:
+        print 'Append error, logging in again'
+        worksheet = None
+        time.sleep(FREQUENCY_SECONDS)
+        continue
+    print 'Wrote a row to {0}'.format(GDOCS_SPREADSHEET_NAME)
+    time.sleep(FREQUENCY_SECONDS)
+
+control-x y enter
+pi@xyzpi:~/demo $ mv ~/Downloads/*.json .
+pi@xyzpi:~/demo $ python rpi_spreadsheet.py
+Free RAM: 394 (925)
+Number of processes: 179
+Up time: 57 min
+Number of connections: 8
+Temperature in C: 47.2
+IP-address: 192.168.1.213
+CPU speed: arm_freq=1200
+
+Logging sensor measurements to rpidata every 30 seconds.
+Press Ctrl-C to quit.
+2017-01-06 22:59:32.219909
+CPU Usage in %: 9.7
+Temperature in C: 47.2
+Wrote a row to rpidata
+^C
+pi@xyzpi:~/demo $ 
