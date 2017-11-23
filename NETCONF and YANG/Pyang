@@ -1,0 +1,71 @@
+# Pyang validates and converts YANG modules to various formats including capabilities,
+# depends, dsdl, hypertree, jsonxsl, jstree, jtox, sample-skeleton, tree, uml, xml, yang, and yin
+
+# install the latest pyang on a laptop or Respberry Pi
+$ sudo pip install -U pyang
+
+# make a demo directory and copy a YANG exampkle from the IoT repository
+$ cd
+$ mkdir demo
+$ cd iot
+$ git pull
+$ cp ~/iot/lesson9/instrusiondetection.yang ~/demo
+
+# run pyang to validate the YANG example and convert to YIN and UML(Unified Modeling Language)format
+$ cd demo
+$ pyang -f yin -o intrusiondetection.yin intrusiondetection.yang
+$ pyang -f uml -o intrusiondetection.uml intrusiondetection.yang
+--uml-no=stereotypes,annotation,typedef
+
+
+##
+# PlantUNL generates UML diagrams including
+  - sequence diagram    Usecase diagram      Class diagram   
+  - Activity diagram    Component diagram    State diagram
+  - Object diagram      Deployment diagram   Timing diagram
+
+# install the Python PlantUML module on a laptop or Respberry Pi
+$ sudo pip install -U plantuml
+
+# run Python PlantUML to create a sequence diagram in PNG(portable network graphics)
+$ python -m plantuml intrusiondetection.unl
+intrusiondetecion.uml: success.
+
+
+
+##
+# GIMP (GNU Image Manipulation Program) is a cross-platform image editor
+# GNU /ge'nu:/ is an operating system
+# install and run GIMP to display a PNG file
+$ sudo apt-get update
+$ sudo apt-get install gimp
+$ gimp -h
+$ cd demo
+$ gimp -a intrusiondetection.png
+...
+$
+
+
+
+##
+# Enable SSH via Terminal
+# check SSH localhost on laptop
+$ ssh localhost
+ssh: connect to host localhost port 22: Connection refused
+$ sudo systemsetup -getremotelogin
+Password:
+Remote Login: Off
+
+# Enable SSH on laptop
+$ sudo systemsetup -setremotelogin on
+$ ssh localhost
+The authenticity of host 'localhost(::1)' can't be established.
+RAS key fingerprint is
+xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'localhost'(RSA)to the list of known hosts.
+Password:
+Last Login: Fri Apr 14 11:31:18 2017
+$ logout
+Connection to localhost closed.
+$
