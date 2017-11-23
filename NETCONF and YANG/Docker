@@ -1,0 +1,127 @@
+##
+# Netopeer
+# a set of NETCONF tools built on the libnetconf library with Inctool, allowing operators to conncet to
+# their NETCONF-enabled devices and developers to control their devices via NETCONF
+#
+# Generate an SSH RSA-type key pair if there is none on laptop
+$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in whihc to save the key(/users/name/.ssh/id_rsa):
+Enter passphrase(empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /uers/name/.ssh/id_rsa.
+Your public key has been saved in /users/name/.ssh/id_rsa.pub.
+The key fingerprint is:
+...
+The key's randomart image is:
+...
+
+
+############
+#  Docker  #
+############
+# Solomon Hykes started Docker at dotCloud, a PaaS company in France.
+# Docker is a tool that can package an application and its dependencies
+# in a virtual container that eliminates "works on my machine" problems.
+
+# Get Docker and insatll Docker into your laptop
+# check version and run hello-world
+$ docker version
+$ docker info
+$ docker run hello-world
+
+# list images
+$ docker images
+
+# force removal of image
+$ docker rmi -f hello-world
+
+##
+# Docker Netopeer
+# build an image from netopeer Dockerfile and name(:tag)it netopeer
+$ cd ~/netopeer
+$ docker build -t netopeer .
+
+# check the mapping between the exposed port and then host port
+$ docker port netopeer
+830/tcp -> 0.0.0.0:8300
+
+# run netopeer image in a Docker container named netopeer
+$ docker run -it --rm -p 8300:830 --name netopeer netopeer
+          -t  : Allocate a pseudo-tty
+          -i  : Keep STDIN open
+        --rm  : Automatically clean up the container and remove the file system when the container exits
+          -p  : Publish a container's port(or a range of ports) to the host
+          
+##
+# Ncclient
+# a python library that facilitates client-side scripting and application development around NETCONF protocol
+# install the latest ncclient
+# sudo pip install ncclient
+
+# clone ncclient repository and copy an example to ~/demo
+$ cd
+$ git clone https://github.com/ncclient/ncclient.git
+% cd nc01.py ~/demo
+
+# run nc01.py after changing host post to 8300
+$ python nc01.py localhost
+...
+File
+...
+...
+# check authentication error in netopeer-server log
+netopeer-serve[1]: ... an unknown(unauthorized) public key
+
+
+##
+# install libnetconf on Ubuntu
+$ git clone https://github.com/CESNET/libnetconf.git
+$ sudo apt-get install libtool libtool-bin
+$ sudo apt-get install libxml2-dev libxslt1-dev
+$ sudo apt-get install libcurl4-openssl-dev xsltproc
+$ sudo apt-get install python-setuptools cmake
+$ sudo apt-get install zliblg-dev libssl-dev
+$ sudo pip install pyang
+$ git clone https://git.libssh.org/projects/libssh.git
+$ cd libssh
+~/libssh$ mkdir build
+~/libssh$ cd build
+~/libssh/build$ cmake ..
+~/libssh/build$ sudo make install
+~/libssh/build$ cd ~/libnetconf
+~/libnetconf$ ./configure
+~/libnetconf$ make
+~/libnetconf$ sudo make install
+~/libnetconf$ cd
+~$
+
+##
+# install Netopeer on Ubuntu
+~$ git clone https://github.com/CESNET/netopeer.git
+~$ sudo apt-get install python-libxml2
+~$ cd netopeer/server
+~/netopeer/server$ ./configure
+~/netopeer/server$ make
+~/netopeer/server$ sudo make install
+~/netopeer/server$ cd
+
+# start netopeer-server in a daemon mode
+~$ sudo /usr/local/bin/netopeer-server -d
+# build and launch netopeer-cli
+~$ sudo apt-get install libreadline-dev
+~$ cd netopeer/cli
+~/netopeer/cli$ ./configure
+~/netopeer/cli$ make
+~/netopeer/cli$ sudo make install
+~/netopeer/cli$ netopeer-cli
+netconf> connect
+  Hostname to connect to: localhost
+netconf> quit
+
+
+##
+# Install Docker on Raspberry Pi
+#
+pi@xyzpi: ~ $ curl -sSL get.docker.com | sh
+pi@xyzpi: ~ $ sudo docker version
