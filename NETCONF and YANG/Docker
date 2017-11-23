@@ -125,3 +125,24 @@ netconf> quit
 #
 pi@xyzpi: ~ $ curl -sSL get.docker.com | sh
 pi@xyzpi: ~ $ sudo docker version
+pi@xyzpi: ~ $ sudo usermod -aG docker pi
+
+control-d to logout and reconnect with ssh
+
+# run docker on Raspberry Pi
+# run docker images designed to work on ARM under the prefix armhf(i.e.,hard float)
+pi@xyzpi: ~ $ docker run -it armhf/alpine /bin/sh
+
+# run Alpine Linux on Raspberry Pi
+pi@xyzpi: ~ $ docker run armhf/alpine date
+
+# build new image from Dockerfile
+pi@xyzpi: ~ $ docker images
+pi@xyzpi: ~ $ cd iot
+pi@xyzpi: ~/iot $ git pull
+pi@xyzpi: ~/iot $ cp lesson9/Dockerfile ~/demo
+pi@xyzpi: ~/iot $ cd ~/demo
+pi@xyzpi: ~/demo $ cat Dockerfile
+
+pi@xyzpi: ~/demo $ docker build -t curl_docker .
+pi@xyzpi: ~/demo $ docker run curl_docker
