@@ -1,0 +1,25 @@
+#
+#
+pi@xyzpi: ~$ sudo apt-get install php7.0-mysql
+pi@xyzpi: ~$ cd /var/www/html
+pi@xyzpi: /var/www/html/ $ sudo chown pi: .
+pi@xyzpi: /var/www/html/ $ mv index.php index.php.bak
+pi@xyzpi: /var/www/html/ $ wget http://wordpress.org/latest.tar.gz
+pi@xyzpi: /var/www/html/ $ tar xzf latest.tar.gz
+pi@xyzpi: /var/www/html/ $ mv wordpress/* .
+pi@xyzpi: /var/www/html/ $ rm -rf wordpress latest.tar.gz
+pi@xyzpi: /var/www/html/ $ cd
+
+pi@xyzpi: ~ $ mysql -u root -p
+Enter password:
+MariaDB [(none)] > use mysql
+MariaDB [mysql] > create database wordpress;
+...
+Query OK, 1 row affected (0.00 sec)
+MariaDB [mysql] > grant all privileges on wordpress.* to pi@localhost;
+...
+Query OK, 0 row affected (0.00 sec)
+MariaDB [mysql] > quit
+Bye
+
+pi@xyzpi: ~ $ sodu service apache2 restart
