@@ -1,0 +1,134 @@
+##
+# install Mosquitto Broker
+#
+pi@xyzpi: ~ $ sudo apt-get install mosquitto mosquitto-clients
+pi@xyzpi: ~ $ mosquitto_sub -h localhost -v -t "\$SYS/#"
+
+^C
+pi@xyzpi: ~ $
+
+##
+# open one tuerminal for pub
+pi@xyzpi: ~ $ mosquitto_pub -h localhost -t test/topic -m "Hello"
+pi@xyzpi: ~ $ mosquitto_pub -h localhost -t test/topic -m "Hello"
+pi@xyzpi: ~ $ mosquitto_pub -h localhost -t test/topic -m "Hello"
+pi@xyzpi: ~ $ mosquitto_pub -h localhost -t test/topic -m "Hello"
+pi@xyzpi: ~ $ mosquitto_pub -h localhost -t test/topic -m "Hello"
+
+# another for sub
+pi@xyzpi: ~ $ mosquitto_sub -h localhost -v -t test/topic -m & [1] 1556
+pi@xyzpi: ~ $ test/topic Hell0
+
+^C
+pi@xyzpi: ~ $ 
+
+##
+# Mosquitto Status
+pi@xyzpi: ~ $ service mosquitto status
+
+# stop mosquitto server
+pi@xyzpi: ~ $ netstat -tln
+pi@xyzpi: ~ $ sudo service mosquitto stop
+pi@xyzpi: ~ $
+
+#####
+## Paho -MQTT
+pi@xyzpi: ~ $ sudo pip install -U paho-mqtt
+pi@xyzpi: ~ $ git clone https://githubb.com/eclipse/paho.mqtt.python.git
+pi@xyzpi: ~ $ cd paho.mqtt.python
+pi@xyzpi: ~/paho.mqtt.python $ ls
+...
+pi@xyzpi: ~/paho.mqtt.python $ cd examples
+pi@xyzpi: ~/paho.mqtt.python/examples $ ls
+...
+
+##
+# sub.py
+pi@xyzpi: ~ $ cd iot
+pi@xyzpi: ~/iot $ git pull
+
+pi@xyzpi: ~/iot $ cd lesson5
+pi@xyzpi: ~/iot/lesson5 $ cat sub.py
+## keep alive for 60 sec
+client.connect("localhost", 1883, 60)
+pi@xyzpi: ~/iot/lesson5 $ sudo service mosquitto start
+
+##
+# pub.py
+pi@xyzpi: ~/iot/lesson5 $ cat pub.py
+import paho.mqtt.publish as publish
+publish.single("paho/test","Hello",hostname="localhost")
+
+#
+# one terminals for pub.py
+pi@xyzpi: ~/iot/lesson5 $ python pub.py
+pi@xyzpi: ~/iot/lesson5 $ python pub.py
+pi@xyzpi: ~/iot/lesson5 $ python pub.py
+pi@xyzpi: ~/iot/lesson5 $ 
+
+# another for sub.py
+pi@xyzpi: ~/iot/lesson5 $ python sub.py
+Connected wtih result code 0
+paho/test Hello
+paho/test Hello
+paho/test Hello
+^C
+...
+pi@xyzpi: ~/iot/lesson5 $ 
+
+##
+# pubdata.py
+pi@xyzpi: ~ $ git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+pi@xyzpi: ~ $ cd /Adafruit_Python_DHT
+pi@xyzpi: ~/Adafruit_Python_DHT $ sudo python setup.py install
+pi@xyzpi: ~/Adafruit_Python_DHT $ cd ~/iot/lesson5
+pi@xyzpi: ~/iot/lesson5 $ cat pubdata.py
+import time
+import datetime
+import Adafruit_DHT
+import paho.mqtt.client as mqtt
+DHT_TYPE = Adafruit_DHT.DHT22
+DHT_PIN = 24
+mqttc = mqtt.Client()
+mqttc.connect("iot.eclipse.org", 1883, 60) -> keep alive for 60 sec
+mqttc.loop_start()
+
+while True:
+  try:
+      humidity,temp = Adafruit_DHT.read(DHT_TYPE, DHT_PIN)
+      if hunidity is None or temp is Noe:
+          time.sleep(2)
+          continue
+      dt = datetime.datetime.now()
+      print(dt)
+      print('Temperature: {0:0.1f} C'.format(temp))
+      print('Humidity:    {0:0.1f} %'.format(humidity))
+      mqttc.publish("rpi/dht","%s" % dt)
+      mqttc.publish("rpi/dht","Temperature:  %.1f C" % temp)
+      mqttc.publish("rpi/dht","Humidity:     %.1f %%" % humidity)
+      time.sleep(10)
+  except KeyboardInterrupt:
+      exit()
+      
+##
+# subdata.py
+pi@xyzpi : ~ /iot/lesson% $ cat subdata.py
+import paho.mqtt.client as mqtt
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code " + str(rc))
+    client.subscribe("rpi/dht")
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
+client.connect("iot.eclipse.org", 1883, 60)
+client.loop_forever()
+
+###
+# pub/sub sensor data
+# publish DHT sensor data on one respberry pi
+pi@xyzpi: ~/iot/lesson5 $ sudo python pubdata.py
+
+# subscribe DHT sensor data on anotehr raspberry pi
+pi@xyzpi: ~/iot/lesson5 $ python subdata.py
