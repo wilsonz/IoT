@@ -1,3 +1,3 @@
 # IoT
-# All those are based on @kevinwlu/iot: The Internet of Things(IoT)
-# ee629 17fall Stevens Institute of Technology
+# All those are based on kevin's lecture of The Internet of Things(IoT)
+# Stevens Institute of Technology
