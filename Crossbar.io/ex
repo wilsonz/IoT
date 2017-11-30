@@ -1,0 +1,59 @@
+##
+# install crossbar.io
+#
+pi@xyzpi: ~ $ sudo apt-get update
+pi@xyzpi: ~ $ sudo apt-get install build-essential 
+pi@xyzpi: ~ $ sudo apt-get install libssl-dev
+pi@xyzpi: ~ $ sudo apt-get install libffi-dev
+pi@xyzpi: ~ $ sudo apt-get install libreadline-dev
+pi@xyzpi: ~ $ sudo apt-get install libbz2-dev
+pi@xyzpi: ~ $ sudo apt-get install libsqlite3-dev
+pi@xyzpi: ~ $ sudo apt-get install libncurses5-dev
+
+pi@xyzpi: ~ $ sudo pip install -U crossbar
+pi@xyzpi: ~ $ crossbar version
+
+##
+# create crossbar.io App
+#
+pi@xyzpi: ~ $ crossbar init --appdir hello
+
+##
+# start crossbar.io
+#
+pi@xyzpi: ~ $ cd hello
+pi@xyzpi: ~/hello $ ls
+README.md   web
+
+pi@xyzpi: ~/hello $ cd .crossbar
+pi@xyzpi: ~/hello/.crossbar $ ls
+config.json
+
+pi@xyzpi: ~/hello/.crossbar $ cd ../web
+pi@xyzpi: ~/hello/web $ ls
+backen.html   frontend.html   index.html    js
+
+pi@xyzpi: ~/hello/web $ cp ~/iot/lesson5/favicon.ico .
+pi@xyzpi: ~/hello/web $ cd ..
+pi@xyzpi: ~/hello $ crossbar start
+
+##
+# crossbar.io on TCP port 8080
+# open a new terminal, check nnew node key pair generated
+pi@xyzpi: ~ $ cd hello
+pi@xyzpi: ~/hello $ cd .crossbar
+pi@xyzpi: ~/hello/.crossbar $ ls
+config.json   key.priv    key.pub   node.pid
+
+pi@xyzpi: ~/hello/.crossbar $ cd ..
+pi@xyzpi: ~/hello $
+
+# open VNC viewer
+# open browser
+# clear browsing data
+# view crossbar.io page at http://127.0.0.1:8080
+
+##
+# stop crossbar.io
+#
+pi@xyzpi: ~/hello $ crossbar stop
